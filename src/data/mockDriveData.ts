@@ -1,4 +1,4 @@
-import type { DriveItem } from "../types/drive"
+import type { DriveItem } from "../types/drive.ts"
 
 export const mockDriveData: DriveItem[] = [
   {

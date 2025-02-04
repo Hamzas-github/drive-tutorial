@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { FolderIcon, FileIcon, Upload, ChevronRight } from "lucide-react"
-import type { DriveItem, Breadcrumb, FolderItem } from "../types/drive"
+import type { DriveItem, Breadcrumb, FolderItem } from "../types/drive.ts"
 import { mockDriveData } from "../data/mockDriveData"
 import { Button } from "~/components/ui/button"
 

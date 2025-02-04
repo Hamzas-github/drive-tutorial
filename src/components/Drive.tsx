@@ -4,7 +4,9 @@ import React, { useState } from "react"
 import { FolderIcon, FileIcon, Upload, ChevronRight } from "lucide-react"
 import type { DriveItem, Breadcrumb, FolderItem } from "../types/drive.ts"
 import { mockDriveData } from "../data/mockDriveData"
-import { Button } from "~/components/ui/button"
+import { Button } from "./ui/button" // Fixed import path
+
+const isFolderItem = (item: DriveItem): item is FolderItem => item.type === "folder"
 
 const DriveItemComponent: React.FC<{ item: DriveItem; onNavigate: (item: FolderItem) => void }> = ({
   item,
@@ -13,7 +15,7 @@ const DriveItemComponent: React.FC<{ item: DriveItem; onNavigate: (item: FolderI
   return (
     <div
       className="flex items-center p-2 hover:bg-gray-700 rounded cursor-pointer"
-      onClick={() => item.type === "folder" && onNavigate(item as FolderItem)}
+      onClick={() => isFolderItem(item) && onNavigate(item)}
     >
       {item.type === "folder" ? (
         <FolderIcon className="mr-2 text-yellow-500" size={18} />
@@ -57,8 +59,8 @@ export const Drive: React.FC = () => {
 
   const findFolder = (items: DriveItem[], id: string): FolderItem | null => {
     for (const item of items) {
-      if (item.id === id && item.type === "folder") return item as FolderItem
-      if (item.type === "folder") {
+      if (item.id === id && isFolderItem(item)) return item
+      if (isFolderItem(item)) {
         const found = findFolder(item.children, id)
         if (found) return found
       }
